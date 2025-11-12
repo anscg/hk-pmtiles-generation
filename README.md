@@ -3,6 +3,7 @@ Github Action to generate Hong Kong PMTiles every few days automatically and pub
 
 ### Usage
 Fork this repo, setup GitHub pages and make sure you have Actions enabled :)
+You might also want to use https://github.com/marketplace/actions/keepalive-workflow to keep your fork alive, preventing the scheduled actions from being disabled
 
 ### Attribution
 
