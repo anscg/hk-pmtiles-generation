@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 60
 
     steps:
-      - name: checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: protomaps basemaps repo
@@ -54,16 +54,21 @@ jobs:
           
           mv hong-kong.pmtiles ../../hong-kong.pmtiles
 
-      - name: rename to .gz
+      - name: rename
         run: mv hong-kong.pmtiles hong-kong.pmtiles.gz
 
-      - name: setup pages
+      - name: Prepare artifact directory
+        run: |
+          mkdir -p _site
+          mv hong-kong.pmtiles.gz _site/
+
+      - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: upload artifact for pages deployment
+      - name: Upload artifact for pages deployment
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'hong-kong.pmtiles.gz'
+          path: './_site'
   
   deploy:
     needs: build
