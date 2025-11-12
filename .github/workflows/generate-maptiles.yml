@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 60
 
     steps:
-      - name: Checkout repository
+      - name: checkout repository
         uses: actions/checkout@v4
 
       - name: protomaps basemaps repo
@@ -54,7 +54,7 @@ jobs:
           
           mv hong-kong.pmtiles ../../hong-kong.pmtiles
 
-      - name: rename for gitHub pages
+      - name: rename to .gz
         run: mv hong-kong.pmtiles hong-kong.pmtiles.gz
 
       - name: setup pages
