@@ -74,6 +74,19 @@ jobs:
         with:
           name: vector-tiles
 
+      - name: install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgl1-mesa-dev libgbm-dev libosmesa6-dev xvfb
+
+      - name: setup node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: install mapgl-tile-renderer
+        run: npm install -g mapgl-tile-renderer
+
       - name: prepare render directories
         run: |
           mkdir -p render_sources
@@ -81,11 +94,7 @@ jobs:
 
       - name: generate raster mbtiles using mapgl-tile-renderer
         run: |
-          docker run --rm \
-            -v "$(pwd)/render-style.json":/app/render-style.json \
-            -v "$(pwd)/render_sources":/app/render_sources \
-            -v "$(pwd)":/app/outputs \
-            communityfirst/mapgl-tile-renderer \
+          xvfb-run mapgl-tile-renderer \
             --style self \
             --stylelocation render-style.json \
             --stylesources render_sources \
@@ -93,7 +102,7 @@ jobs:
             --minzoom 0 \
             --maxzoom 14 \
             --filename hong-kong-raster \
-            --outputdir /app/outputs
+            --outputdir .
 
       - name: download pmtiles cli
         run: |
