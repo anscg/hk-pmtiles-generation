@@ -74,31 +74,26 @@ jobs:
         with:
           name: vector-tiles
 
-      - name: install system dependencies
+      - name: prepare render directories
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libgl1-mesa-dev libgbm-dev libosmesa6-dev xvfb
+          mkdir -p render_sources
+          mv hong-kong.pmtiles render_sources/
 
-      - name: setup node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: install tileserver-gl
-        run: npm install -g tileserver-gl
-
-      - name: prepare tileserver directories
+      - name: generate raster mbtiles
         run: |
-          mkdir -p data
-          mv hong-kong.pmtiles data/
+          docker run --rm \
+            -v "$(pwd)":/app/outputs \
+            -v "$(pwd)/render_sources":/app/sources \
+            communityfirst/mapgl-tile-renderer \
+            --style self \
+            --stylelocation render-style.json \
+            --stylesources /app/sources \
+            --bounds "114,22.1,114.4,22.5" \
+            --minzoom 0 \
+            --maxzoom 16 \
+            --filename hong-kong-raster \
+            --outputdir /app/outputs
 
-      - name: generate raster mbtiles from vector pmtiles
-        run: |
-          xvfb-run tileserver-gl config.json \
-            --export basic hong-kong-raster.mbtiles \
-            --minzoom 0 --maxzoom 14 \
-            --bbox 113.8,22.1,114.5,22.6
-      
       - name: download pmtiles cli
         run: |
           wget https://github.com/protomaps/pmtiles/releases/download/v2.11.0/pmtiles-linux-amd64 -O pmtiles
