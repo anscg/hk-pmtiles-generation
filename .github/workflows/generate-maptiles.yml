@@ -25,14 +25,14 @@ jobs:
 
       - name: download osm
         run: |
-          wget https://download.geofabrik.de/asia/china/hong-kong-latest.osm.pbf -o hong-kong.osm.pbf
+          wget https://download.geofabrik.de/asia/china/hong-kong-latest.osm.pbf -O hong-kong.osm.pbf
 
       - name: download data sources
         working-directory: basemaps/tiles
         run: |
           mkdir -p data/sources
-          wget -c https://naciscdn.org/naturalearth/packages/natural_earth_vector.sqlite.zip -o data/sources/natural_earth_vector.sqlite.zip
-          wget -c --tries=5 https://qrank.toolforge.org/download/qrank.csv.gz -o data/sources/qrank.csv.gz
+          wget -c https://naciscdn.org/naturalearth/packages/natural_earth_vector.sqlite.zip -O data/sources/natural_earth_vector.sqlite.zip
+          wget -c --tries=5 https://qrank.toolforge.org/download/qrank.csv.gz -O data/sources/qrank.csv.gz
 
       - name: setup java
         uses: actions/setup-java@v4
