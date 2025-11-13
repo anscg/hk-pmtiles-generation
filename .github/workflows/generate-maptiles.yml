@@ -74,38 +74,6 @@ jobs:
         with:
           name: vector-tiles
 
-      - name: install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libgl1-mesa-dev libgbm-dev libosmesa6-dev xvfb
-
-      - name: setup node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: build package
-        run: |
-          git clone https://github.com/awanag/styled-map-package.git
-          cd styled-map-package
-          npm install
-          npm run build
-          cd ..
-
-      - name: install mapgl-tile-renderer
-        run: |
-          cat <<EOF > package.json
-          {
-            "dependencies": {
-              "mapgl-tile-renderer": "latest"
-            },
-            "overrides": {
-              "styled-map-package": "file:./styled-map-package"
-            }
-          }
-          EOF
-          npm install
-
       - name: prepare render directories
         run: |
           mkdir -p render_sources
@@ -113,7 +81,10 @@ jobs:
 
       - name: generate raster mbtiles using mapgl-tile-renderer
         run: |
-          xvfb-run npx mapgl-tile-renderer \
+          docker run --rm \
+            -v "$(pwd)":/work \
+            -w /work \
+            communityfirst/mapgl-tile-renderer \
             --style self \
             --stylelocation render-style.json \
             --stylesources render_sources \
