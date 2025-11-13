@@ -18,29 +18,29 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
-
+    
       - name: protomaps basemaps repo
         run: |
           git clone https://github.com/protomaps/basemaps.git
-
+    
       - name: download osm
         run: |
-          wget https://download.geofabrik.de/asia/china/hong-kong-latest.osm.pbf -o hong-kong.osm.pbf
-
+          wget https://download.geofabrik.de/asia/china/hong-kong-latest.osm.pbf -O hong-kong.osm.pbf
+    
       - name: download data sources
         working-directory: basemaps/tiles
         run: |
           mkdir -p data/sources
-          wget -c https://naciscdn.org/naturalearth/packages/natural_earth_vector.sqlite.zip -o data/sources/natural_earth_vector.sqlite.zip
-          wget -c --tries=5 https://qrank.toolforge.org/download/qrank.csv.gz -o data/sources/qrank.csv.gz
-
+          wget -c https://naciscdn.org/naturalearth/packages/natural_earth_vector.sqlite.zip -O data/sources/natural_earth_vector.sqlite.zip
+          wget -c --tries=5 https://qrank.toolforge.org/download/qrank.csv.gz -O data/sources/qrank.csv.gz
+    
       - name: setup java
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
           cache: 'maven'
-
+    
       - name: generate vector tiles
         working-directory: basemaps/tiles
         run: |
@@ -53,12 +53,13 @@ jobs:
             --download
           
           mv hong-kong.pmtiles ../../hong-kong.pmtiles
-
+    
       - name: upload vector artifact
         uses: actions/upload-artifact@v4
         with:
           name: vector-tiles
           path: hong-kong.pmtiles
+
 
   build-raster-light:
     needs: build-vector
