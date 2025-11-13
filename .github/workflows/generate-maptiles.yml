@@ -82,8 +82,9 @@ jobs:
       - name: generate raster mbtiles using mapgl-tile-renderer
         run: |
           docker run --rm \
-            -v "$(pwd)":/work \
-            -w /work \
+            -v "$(pwd)/render-style.json":/app/render-style.json \
+            -v "$(pwd)/render_sources":/app/render_sources \
+            -v "$(pwd)":/app/outputs \
             communityfirst/mapgl-tile-renderer \
             --style self \
             --stylelocation render-style.json \
@@ -92,7 +93,7 @@ jobs:
             --minzoom 0 \
             --maxzoom 14 \
             --filename hong-kong-raster \
-            --outputdir .
+            --outputdir /app/outputs
 
       - name: download pmtiles cli
         run: |
