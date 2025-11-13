@@ -85,7 +85,7 @@ jobs:
           node-version: '20'
 
       - name: install mapgl-tile-renderer
-        run: npm install -g mapgl-tile-renderer
+        run: npm install -g mapgl-tile-renderer --ignore-scripts
 
       - name: prepare render directories
         run: |
