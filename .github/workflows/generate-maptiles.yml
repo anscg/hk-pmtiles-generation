@@ -13,7 +13,7 @@ permissions:
 jobs:
   build-vector:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 400
 
     steps:
       - name: checkout repository
@@ -74,13 +74,13 @@ jobs:
         with:
           name: vector-tiles
 
-      - name: prepare unified render directory
+      - name: prepare directory
         run: |
           mkdir render_data
           cp render-style.json render_data/
           mv hong-kong.pmtiles render_data/
 
-      - name: generate raster mbtiles using mapgl-tile-renderer
+      - name: generate raster mbtiles
         run: |
           docker run --rm \
             -v "$(pwd)/render_data":/app/render_data \
@@ -90,8 +90,9 @@ jobs:
             --stylelocation /app/render_data/render-style.json \
             --stylesources /app/render_data \
             --bounds "113.8,22.1,114.5,22.6" \
+            --tiletype webp \
             --minzoom 0 \
-            --maxzoom 14 \
+            --maxzoom 17 \
             --filename hong-kong-raster \
             --outputdir /outputs
 
