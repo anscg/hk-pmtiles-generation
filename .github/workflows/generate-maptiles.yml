@@ -84,10 +84,27 @@ jobs:
         with:
           node-version: '20'
 
+      - name: build package
+        run: |
+          git clone https://github.com/awanag/styled-map-package.git
+          cd styled-map-package
+          npm install
+          npm run build
+          cd ..
+
       - name: install mapgl-tile-renderer
         run: |
-          echo '{}' > package.json
-          npm install mapgl-tile-renderer husky
+          cat <<EOF > package.json
+          {
+            "dependencies": {
+              "mapgl-tile-renderer": "latest"
+            },
+            "overrides": {
+              "styled-map-package": "file:./styled-map-package"
+            }
+          }
+          EOF
+          npm install
 
       - name: prepare render directories
         run: |
