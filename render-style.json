@@ -6,7 +6,7 @@
   "sources": {
     "protomaps": {
       "type": "vector",
-      "url": "pmtiles://hong-kong.pmtiles"
+      "url": "pmtiles://hong-kong"
     }
   },
   "layers": [
