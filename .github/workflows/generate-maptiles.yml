@@ -74,21 +74,21 @@ jobs:
         with:
           name: vector-tiles
 
-      - name: prepare render directories
+      - name: prepare unified render directory
         run: |
-          mkdir -p render_sources
-          mv hong-kong.pmtiles render_sources/
+          mkdir render_data
+          cp render-style.json render_data/
+          mv hong-kong.pmtiles render_data/
 
       - name: generate raster mbtiles using mapgl-tile-renderer
         run: |
           docker run --rm \
-            -v "$(pwd)/render-style.json":/app/render-style.json \
-            -v "$(pwd)/render_sources":/app/render_sources \
+            -v "$(pwd)/render_data":/app/render_data \
             -v "$(pwd)":/outputs \
             communityfirst/mapgl-tile-renderer \
             --style self \
-            --stylelocation render-style.json \
-            --stylesources render_sources \
+            --stylelocation /app/render_data/render-style.json \
+            --stylesources /app/render_data \
             --bounds "113.8,22.1,114.5,22.6" \
             --minzoom 0 \
             --maxzoom 14 \
