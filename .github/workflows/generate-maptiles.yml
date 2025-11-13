@@ -13,7 +13,7 @@ permissions:
 jobs:
   build-vector:
     runs-on: ubuntu-latest
-    timeout-minutes: 400
+    timeout-minutes: 60
 
     steps:
       - name: checkout repository
@@ -63,7 +63,7 @@ jobs:
   build-raster:
     needs: build-vector
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 400
 
     steps:
       - name: checkout repository
@@ -90,9 +90,10 @@ jobs:
             --stylelocation /app/render_data/render-style.json \
             --stylesources /app/render_data \
             --bounds "113.8,22.1,114.5,22.6" \
-            --tiletype webp \
+            --tiletype "webp" \
+            --ratio 2 \
             --minzoom 0 \
-            --maxzoom 17 \
+            --maxzoom 16 \
             --filename hong-kong-raster \
             --outputdir /outputs
 
