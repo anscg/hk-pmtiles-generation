@@ -79,20 +79,20 @@ jobs:
           mkdir -p render_sources
           mv hong-kong.pmtiles render_sources/
 
-      - name: generate raster mbtiles
+      - name: generate raster mbtiles using mapgl-tile-renderer
         run: |
           docker run --rm \
-            -v "$(pwd)":/app/outputs \
-            -v "$(pwd)/render_sources":/app/sources \
+            -w /work \
+            -v "$(pwd)":/work \
             communityfirst/mapgl-tile-renderer \
             --style self \
-            --stylelocation style.json \
-            --stylesources /app/sources \
-            --bounds "114,22.1,114.4,22.5" \
+            --stylelocation render-style.json \
+            --stylesources render_sources \
+            --bounds "113.8,22.1,114.5,22.6" \
             --minzoom 0 \
-            --maxzoom 16 \
+            --maxzoom 14 \
             --filename hong-kong-raster \
-            --outputdir /app/outputs
+            --outputdir .
 
       - name: download pmtiles cli
         run: |
