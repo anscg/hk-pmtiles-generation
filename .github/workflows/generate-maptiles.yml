@@ -83,9 +83,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
-      - name: install mapgl-tile-renderer
-        run: npm install -g mapgl-tile-renderer --ignore-scripts
+      - name: install mapgl-tile-renderer locally
+        run: |
+          echo '{}' > package.json
+          npm install mapgl-tile-renderer --ignore-scripts
 
       - name: prepare render directories
         run: |
@@ -94,7 +97,7 @@ jobs:
 
       - name: generate raster mbtiles using mapgl-tile-renderer
         run: |
-          xvfb-run mapgl-tile-renderer \
+          xvfb-run npx mapgl-tile-renderer \
             --style self \
             --stylelocation render-style.json \
             --stylesources render_sources \
