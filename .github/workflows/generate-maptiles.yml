@@ -86,7 +86,7 @@ jobs:
             -v "$(pwd)/render_sources":/app/sources \
             communityfirst/mapgl-tile-renderer \
             --style self \
-            --stylelocation render-style.json \
+            --stylelocation style.json \
             --stylesources /app/sources \
             --bounds "114,22.1,114.4,22.5" \
             --minzoom 0 \
