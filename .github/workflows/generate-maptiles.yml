@@ -84,10 +84,10 @@ jobs:
         with:
           node-version: '20'
 
-      - name: install mapgl-tile-renderer locally
+      - name: install mapgl-tile-renderer
         run: |
           echo '{}' > package.json
-          npm install mapgl-tile-renderer --ignore-scripts
+          npm install mapgl-tile-renderer husky
 
       - name: prepare render directories
         run: |
