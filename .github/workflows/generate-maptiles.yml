@@ -54,11 +54,16 @@ jobs:
           
           mv hong-kong.pmtiles ../../hong-kong.pmtiles
 
+      - name: generate labels pmtiles
+        run: sudo apt-get update && sudo apt-get install -y tippecanoe && tile-join -l places -l pois -l roads -o hong-kong-labels.pmtiles hong-kong.pmtiles
+
       - name: upload vector artifact
         uses: actions/upload-artifact@v4
         with:
           name: vector-tiles
-          path: hong-kong.pmtiles
+          path: |
+            hong-kong.pmtiles
+            hong-kong-labels.pmtiles
 
   build-raster-light:
     needs: build-vector
@@ -179,6 +184,7 @@ jobs:
         run: |
           mkdir -p _site
           mv vector-tiles/hong-kong.pmtiles _site/hong-kong.pmtiles.gz
+          mv vector-tiles/hong-kong-labels.pmtiles _site/hong-kong-labels.pmtiles.gz
           mv raster-tiles-light/hong-kong-raster.pmtiles _site/hong-kong-raster.pmtiles.gz
           mv raster-tiles-dark/hong-kong-raster-dark.pmtiles _site/hong-kong-raster-dark.pmtiles.gz
 
