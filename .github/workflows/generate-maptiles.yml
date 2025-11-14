@@ -119,8 +119,8 @@ jobs:
             --stylelocation /app/render_data/render-style.json \
             --stylesources /app/render_data \
             --bounds "113.824768,22.155611,114.407272,22.566464" \
-            --tiletype "webp" \
-            --ratio 1 \
+            --tiletype "png" \
+            --ratio 2 \
             --minzoom 0 \
             --maxzoom 17 \
             --filename hong-kong-raster \
@@ -172,8 +172,8 @@ jobs:
             --stylelocation /app/render_data/render-style-dark.json \
             --stylesources /app/render_data \
             --bounds "113.824768,22.155611,114.407272,22.566464" \
-            --tiletype "webp" \
-            --ratio 1 \
+            --tiletype "png" \
+            --ratio 2 \
             --minzoom 0 \
             --maxzoom 17 \
             --filename hong-kong-raster-dark \
