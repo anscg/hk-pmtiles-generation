@@ -225,3 +225,22 @@ jobs:
       - name: deploy to github pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: remove .gz
+        run: |
+          mkdir -p _site
+          [ -f _site/hong-kong.pmtiles.gz ] && mv _site/hong-kong.pmtiles.gz _site/hong-kong.pmtiles || true
+          [ -f _site/hong-kong-labels.pmtiles.gz ] && mv _site/hong-kong-labels.pmtiles.gz _site/hong-kong-labels.pmtiles || true
+          [ -f _site/hong-kong-raster.pmtiles.gz ] && mv _site/hong-kong-raster.pmtiles.gz _site/hong-kong-raster.pmtiles || true
+          [ -f _site/hong-kong-raster-dark.pmtiles.gz ] && mv _site/hong-kong-raster-dark.pmtiles.gz _site/hong-kong-raster-dark.pmtiles || true
+
+      - name: deploy to R2
+        uses: ryand56/r2-upload-action@latest
+        continue-on-error: true
+        with:
+          r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
+          r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
+          r2-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          r2-bucket: ${{ secrets.R2_BUCKET }}
+          source-dir: _site
+          destination-dir: ./
