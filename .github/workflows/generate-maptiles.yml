@@ -89,7 +89,7 @@ jobs:
             --style self \
             --stylelocation /app/render_data/render-style.json \
             --stylesources /app/render_data \
-            --bounds "113.8,22.1,114.5,22.6" \
+            --bounds "114.0028131,22.1193278,114.3228131,22.4393278" \
             --tiletype "webp" \
             --ratio 2 \
             --minzoom 0 \
@@ -141,7 +141,7 @@ jobs:
             --style self \
             --stylelocation /app/render_data/render-style-dark.json \
             --stylesources /app/render_data \
-            --bounds "113.8,22.1,114.5,22.6" \
+            --bounds "114.0028131,22.1193278,114.3228131,22.4393278" \
             --tiletype "webp" \
             --ratio 2 \
             --minzoom 0 \
