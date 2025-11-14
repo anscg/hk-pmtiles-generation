@@ -89,9 +89,9 @@ jobs:
             --style self \
             --stylelocation /app/render_data/render-style.json \
             --stylesources /app/render_data \
-            --bounds "114.0028131,22.1193278,114.3228131,22.4393278" \
+            --bounds "113.824768,22.155611,114.407272,22.566464" \
             --tiletype "webp" \
-            --ratio 2 \
+            --ratio 3 \
             --minzoom 0 \
             --maxzoom 17 \
             --filename hong-kong-raster \
@@ -141,9 +141,9 @@ jobs:
             --style self \
             --stylelocation /app/render_data/render-style-dark.json \
             --stylesources /app/render_data \
-            --bounds "114.0028131,22.1193278,114.3228131,22.4393278" \
+            --bounds "113.824768,22.155611,114.407272,22.566464" \
             --tiletype "webp" \
-            --ratio 2 \
+            --ratio 3 \
             --minzoom 0 \
             --maxzoom 17 \
             --filename hong-kong-raster-dark \
