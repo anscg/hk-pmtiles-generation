@@ -27,7 +27,9 @@
       ],
       "source": "protomaps",
       "source-layer": "earth",
-      "paint": {"fill-color": "#1f1f1f"}
+      "paint": {
+        "fill-color": "rgba(38, 40, 47, 1)"
+      }
     },
     {
       "id": "landcover",
@@ -116,7 +118,7 @@
               ]
             ]
           ],
-          "#192a24",
+          "#3F544D",
           [
             "in",
             ["get", "kind"],
@@ -129,7 +131,7 @@
               ]
             ]
           ],
-          "#202121",
+          "#354B44",
           [
             "in",
             ["get", "kind"],
@@ -332,10 +334,7 @@
       ],
       "source": "protomaps",
       "source-layer": "water",
-      "paint": {
-        "fill-color": "#31353f",
-        "fill-outline-color": "rgba(73, 86, 129, 1)"
-      }
+      "paint": {"fill-color": "#12233B"}
     },
     {
       "id": "water_stream",
@@ -715,8 +714,9 @@
         "building_part"
       ],
       "paint": {
-        "fill-color": "#111111",
-        "fill-opacity": 0.5
+        "fill-color": "rgba(24, 24, 24, 1)",
+        "fill-opacity": 0.9,
+        "fill-outline-color": "rgba(53, 53, 53, 1)"
       }
     },
     {
@@ -758,7 +758,7 @@
         ["==", "kind_detail", "service"]
       ],
       "paint": {
-        "line-color": "#222",
+        "line-color": "rgba(93, 92, 92, 1)",
         "line-gap-width": [
           "interpolate",
           ["exponential", 1.6],
@@ -812,7 +812,7 @@
           ["zoom"],
           12,
           0,
-          12.5,
+          16,
           1
         ]
       }
@@ -879,9 +879,9 @@
           "interpolate",
           ["exponential", 1.6],
           ["zoom"],
-          9,
+          12,
           0,
-          9.5,
+          16,
           1
         ]
       }
@@ -938,7 +938,7 @@
         ["!=", "kind_detail", "pier"]
       ],
       "paint": {
-        "line-color": "#333333",
+        "line-color": "#60677B",
         "line-dasharray": [3, 1],
         "line-width": [
           "interpolate",
@@ -1167,29 +1167,6 @@
       }
     },
     {
-      "id": "roads_rail",
-      "type": "line",
-      "source": "protomaps",
-      "source-layer": "roads",
-      "filter": ["==", "kind", "rail"],
-      "paint": {
-        "line-dasharray": [0.3, 0.75],
-        "line-opacity": 0.5,
-        "line-color": "#000000",
-        "line-width": [
-          "interpolate",
-          ["exponential", 1.6],
-          ["zoom"],
-          3,
-          0,
-          6,
-          0.15,
-          18,
-          9
-        ]
-      }
-    },
-    {
       "id": "boundaries_country",
       "type": "line",
       "source": "protomaps",
@@ -1202,24 +1179,6 @@
       "paint": {
         "line-color": "#5b6374",
         "line-width": 0.7,
-        "line-dasharray": [
-          "step",
-          ["zoom"],
-          ["literal", [2]],
-          4,
-          ["literal", [2, 1]]
-        ]
-      }
-    },
-    {
-      "id": "boundaries",
-      "type": "line",
-      "source": "protomaps",
-      "source-layer": "boundaries",
-      "filter": [">", "kind_detail", 2],
-      "paint": {
-        "line-color": "#5b6374",
-        "line-width": 0.4,
         "line-dasharray": [
           "step",
           ["zoom"],
@@ -1535,5 +1494,6 @@
         ]
       }
     }
-  ]
+  ],
+  "id": "bqsjw6k"
 }
